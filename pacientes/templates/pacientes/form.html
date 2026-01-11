@@ -1,0 +1,10 @@
+<h1>Paciente</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <button type="submit">Salvar</button>
+    </form>
+
+<a href="{% url 'pacientes_index' %}">Voltar</a>

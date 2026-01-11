@@ -1,0 +1,10 @@
+<h1>Excluir paciente</h1>
+
+<p>Tem certeza que deseja excluir {{ paciente.nome }}?</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Confirmar</button>
+    </form>
+
+<a href="{% url 'pacientes_index' %}">Cancelar</a>
