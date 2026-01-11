@@ -1,0 +1,13 @@
+<h1>Pacientes</h1>
+
+<ul>
+    {% for paciente in pacientes %}
+        <li>
+            {{ paciente.nome }} - 
+            {{ paciente.data_nascimento }} - 
+            {{ paciente.telefone }}
+        </li>
+    {% empty %}
+        <li>Nenhum paciente cadastrado.</li>
+    {% endfor %}
+</ul>

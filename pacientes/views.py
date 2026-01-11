@@ -1,4 +1,10 @@
 from django.shortcuts import render
+from .models import Paciente
 
 def index(request):
-    return render(request, 'pacientes/index.html')
+    pacientes = Paciente.objects.all()
+    return render(
+        request, 
+        'pacientes/index.html',
+        {'pacientes': pacientes}
+    )
