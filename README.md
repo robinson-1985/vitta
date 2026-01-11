@@ -55,12 +55,9 @@ O sistema será estruturado seguindo boas práticas do Django:
 
 ### Apps planejados:
 
-- `core` – Páginas institucionais
+- `consultas` – Agendamentos e remarcações
 - `pacientes` – Cadastro e histórico do paciente
-- `profissionais` – Profissionais da saúde
-- `agendamentos` – Consultas e visitas domiciliares
-- `prontuarios` – Evoluções e registros clínicos
-- `usuarios` – Controle de acesso
+- `prontuarios` – Profissionais da saúde
 
 ---
 
