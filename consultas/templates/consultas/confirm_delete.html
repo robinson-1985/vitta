@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Confirmar exclusão</h2>
+
+<p>
+Deseja excluir a consulta de
+<strong>{{ consulta.paciente.nome }}</strong>
+em {{ consulta.data }}?
+</p>
+
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Confirmar</button>
+</form>
+
+<a href="{% url 'consulta_list' %}">Cancelar</a>
+{% endblock %}

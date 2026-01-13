@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Consultas</h2>
+
+<a href="{% url 'consulta_create' %}">Nova consulta</a>
+
+<ul>
+    {% for consulta in consultas %}
+        <li>
+            {{ consulta.data }} {{ consulta.horario }}  — 
+            {{ consulta.paciente.nome }} — 
+            {{ consulta.status }} |
+            <a href="{% url 'consulta_update' consulta.pk %}">Editar</a>
+            |
+            <a href="{% url 'consulta_delete' consulta.pk %}">Excluir</a>
+        </li>
+    {% empty %}
+        <li>Nenhuma consulta agendada.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
