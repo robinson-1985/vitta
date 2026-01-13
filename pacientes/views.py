@@ -1,47 +1,48 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib import messages
 from .models import Paciente
 from .forms import PacienteForm
 
-def index(request):
-    pacientes = Paciente.objects.all()
-    return render(
-        request, 
-        'pacientes/index.html',
-        {'pacientes': pacientes}
-    )
-    
-    
-def criar(request):
+
+def paciente_list(request):
+    pacientes = Paciente.objects.all().order_by('nome')
+    return render(request, 'pacientes/index.html', {'pacientes': pacientes})
+
+
+def paciente_create(request):
     if request.method == 'POST':
         form = PacienteForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('pacientes_index')
+            messages.success(request, 'Paciente cadastrado com sucesso.')
+            return redirect('paciente_list')
     else:
         form = PacienteForm()
-        
+
     return render(request, 'pacientes/form.html', {'form': form})
 
 
-def editar(request, id):
-    paciente = get_object_or_404(Paciente, id=id)
-    
+def paciente_update(request, pk):
+    paciente = get_object_or_404(Paciente, pk=pk)
+
     if request.method == 'POST':
         form = PacienteForm(request.POST, instance=paciente)
         if form.is_valid():
             form.save()
-            return redirect('pacientes_index')
+            messages.success(request, 'Paciente atualizado com sucesso.')
+            return redirect('paciente_list')
     else:
         form = PacienteForm(instance=paciente)
-        
+
     return render(request, 'pacientes/form.html', {'form': form})
 
 
-def deletar(request, id):
-    paciente = get_object_or_404(Paciente, id=id)
-    
+def paciente_delete(request, pk):
+    paciente = get_object_or_404(Paciente, pk=pk)
+
     if request.method == 'POST':
         paciente.delete()
-        return redirect('pacientes_index')
+        messages.success(request, 'Paciente removido com sucesso.')
+        return redirect('paciente_list')
 
     return render(request, 'pacientes/confirmar_exclusao.html', {'paciente': paciente})

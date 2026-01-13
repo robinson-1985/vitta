@@ -1,16 +1,17 @@
 <h1>Pacientes</h1>
 
-<a href="{% url 'pacientes_criar' %}">Novo paciente</a>
+<a href="{% url 'paciente_create' %}">Novo paciente</a>
 
 <ul>
     {% for paciente in pacientes %}
     <li>
-      {{ paciente.nome }} — {{ paciente.telefone }} |
-      <a href="{% url 'pacientes_editar' paciente.id %}">Editar</a>
-      |
-      <a href="{% url 'pacientes_deletar' paciente.id %}">Excluir</a>
+        {{ paciente.nome }} — {{ paciente.telefone }} |
+        <a href="{% url 'paciente_update' paciente.id %}">Editar</a>
+        |
+        <a href="{% url 'paciente_delete' paciente.id %}">Excluir</a>
     </li>
     {% empty %}
+        
     <li>Nenhum paciente cadastrado.</li>
-  {% endfor %}
+    {% endfor %}
 </ul>
