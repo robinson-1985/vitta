@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Consulta
 from .forms import ConsultaForm
+from datetime import date
 
 def consulta_list(request):
     consultas = Consulta.objects.select_related().order_by('data', 'hora')
@@ -49,3 +50,24 @@ def consulta_delete(request, pk):
         'consultas/confirm_delete.html', 
         {'consulta': consulta}
         )
+
+
+def agenda_diaria(request):
+    data_selecionada = request.GET.get('data')
+    
+    if data_selecionada:
+        consultas = Consulta.objects.filter(
+            data=data_selecionada
+        ).select_related('paciente').order_by('hora')
+    else:
+        consultas = Consulta.objects.filter(
+            data=date.today()
+        ).select_related('paciente').order_by('hora')
+        
+    return render(
+        request, 
+        'consultas/agenda_diaria.html', 
+        {'consultas': consultas, 
+         'data_selecionada': data_selecionada
+         }
+    )

@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Agenda diária</h2>
+
+<form method="get">
+    <label for="data">Selecione a data:</label>
+    <input type="date" id="data" name="data" value="{{ data_selecionada }}">
+    <button type="submit">Filtrar</button>
+</form>
+
+<hr>
+
+<ul>
+    {% for consulta in consultas %}
+        <li>
+            {{ consulta.hora }} —
+            {{ consulta.paciente.nome }} —
+            {{ consulta.status }}
+        </li>
+    {% empty %}
+        <li>Nenhuma consulta para esta data.</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'consulta_list' %}">Voltar</a>
+
+{% endblock  %}
