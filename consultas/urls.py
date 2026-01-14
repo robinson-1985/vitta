@@ -6,5 +6,5 @@ urlpatterns = [
     path('nova/', views.consulta_create, name='consulta_create'),
     path('<int:pk>/editar/', views.consulta_update, name='consulta_update'),
     path('<int:pk>/excluir/', views.consulta_delete, name='consulta_delete'),
-    path('agenda/', views.agenda_diaria, name='agenda_diaria'),
+    path('agenda/', views.agenda, name='agenda'),
 ]

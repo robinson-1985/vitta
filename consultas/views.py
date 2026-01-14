@@ -52,22 +52,23 @@ def consulta_delete(request, pk):
         )
 
 
-def agenda_diaria(request):
+def agenda(request):
     data_selecionada = request.GET.get('data')
     
     if data_selecionada:
         consultas = Consulta.objects.filter(
             data=data_selecionada
-        ).select_related('paciente').order_by('hora')
+        ).order_by('hora')
     else:
         consultas = Consulta.objects.filter(
             data=date.today()
-        ).select_related('paciente').order_by('hora')
+        ).order_by('hora')
         
     return render(
         request, 
-        'consultas/agenda_diaria.html', 
-        {'consultas': consultas, 
-         'data_selecionada': data_selecionada
+        'consultas/agenda.html', 
+        {    
+            'consultas': consultas, 
+            'data_selecionada': data_selecionada
          }
     )

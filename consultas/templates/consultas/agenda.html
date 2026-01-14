@@ -14,9 +14,10 @@
 <ul>
     {% for consulta in consultas %}
         <li>
-            {{ consulta.hora }} —
-            {{ consulta.paciente.nome }} —
-            {{ consulta.status }}
+            <strong>{{ consulta.hora }}</strong> —
+            {{ consulta.paciente.nome }} |
+            {{ consulta.profissional }} |
+            {{ consulta.get_status_display }}
         </li>
     {% empty %}
         <li>Nenhuma consulta para esta data.</li>
