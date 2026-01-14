@@ -4,11 +4,12 @@ from .models import Consulta
 class ConsultaForm(forms.ModelForm):
     class Meta:
         model = Consulta
-        fields = [
-            'paciente',
-            'data',
-            'hora',
-            'profissional',
-            'status',
-            'observacoes',
-        ]
+        fields = '__all__'
+        widgets = {
+            'data': forms.DateInput(
+                attrs={'type': 'date'}
+            ),
+            'hora': forms.TimeInput(
+                attrs={'type': 'time'}
+            ),
+        }
