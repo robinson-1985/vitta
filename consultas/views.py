@@ -4,7 +4,7 @@ from .models import Consulta
 from .forms import ConsultaForm
 
 def consulta_list(request):
-    consultas = Consulta.objects.select_related().order_by('data', 'horario')
+    consultas = Consulta.objects.select_related().order_by('data', 'hora')
     return render(request, 'consultas/list.html', {'consultas': consultas})
 
 
@@ -46,6 +46,6 @@ def consulta_delete(request, pk):
 
     return render(
         request, 
-        'consultas/confirmar_exclusao.html', 
+        'consultas/confirm_delete.html', 
         {'consulta': consulta}
         )

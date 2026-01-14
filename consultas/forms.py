@@ -7,7 +7,7 @@ class ConsultaForm(forms.ModelForm):
         fields = [
             'paciente',
             'data',
-            'horario',
+            'hora',
             'profissional',
             'status',
             'observacoes',
