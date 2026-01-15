@@ -2,5 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('', views.index, name='prontuarios_index'),
+    path('consulta/<int:consulta_id>/', 
+         views.criar_prontuario, 
+         name='prontuario_abrir'
+         ),
 ]

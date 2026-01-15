@@ -1,4 +1,31 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
+from consultas.models import Consulta
+from .models import Prontuario
+from .forms import ProntuarioForm
 
-def index(request):
-    return render(request, 'prontuarios/index.html')
+
+def criar_prontuario(request, consulta_id):
+    consulta = get_object_or_404(Consulta, id=consulta_id)
+    
+    prontuario, created = Prontuario.objects.get_or_create(
+        consulta=consulta
+    )
+    
+    if request.method == 'POST':
+        form = ProntuarioForm(request.POST, instance=prontuario)
+        if form.is_valid():
+            form.save()
+            return redirect('agenda')
+    else:
+        form = ProntuarioForm(instance=prontuario)
+    
+    return render(
+        request, 
+        'prontuarios/form.html', 
+        {
+            'form': form, 
+            'consulta': consulta,
+            'created': created
+            }
+        
+        )
