@@ -18,6 +18,8 @@
             {{ consulta.paciente.nome }} |
             {{ consulta.profissional }} |
             {{ consulta.get_status_display }}
+            |
+            <a href="{% url 'prontuario_abrir' consulta.id %}">Prontuário</a>
         </li>
     {% empty %}
         <li>Nenhuma consulta para esta data.</li>
