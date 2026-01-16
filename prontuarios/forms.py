@@ -10,7 +10,20 @@ class ProntuarioForm(forms.ModelForm):
             'conduta',
         ]
         widgets = {
-            'queixa_principal': forms.Textarea(attrs={'rows': 3}),
-            'evolucao': forms.Textarea(attrs={'rows': 4}),
-            'conduta': forms.Textarea(attrs={'rows': 3}),
+            'queixa_principal': forms.Textarea(attrs={
+                'rows': 4,
+                'placeholder': 'Descreva a queixa principal do paciente.'
+                }),
+            'evolucao': forms.Textarea(attrs={
+                'rows': 6,
+                'placeholder': 'Evolução clínica.'}),
+            'conduta': forms.Textarea(attrs={
+                'rows': 4,
+                'placeholder': 'Conduta adotada.'
+                }),
+        }
+        labels = {
+            'queixa_principal': 'Queixa Principal',
+            'evolucao': 'Evolução',
+            'conduta': 'Conduta',
         }
