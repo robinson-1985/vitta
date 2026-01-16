@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Prontuário</h2>
+<h2>{% if created %}
+        Novo prontuário
+    {% else %}
+        Editar prontuário
+    {% endif %}
+</h2>
 
 <p><strong>Paciente:</strong> {{ consulta.paciente.nome }}</p>
 <p><strong>Consulta:</strong> {{ consulta.data }} {{ consulta.hora }}</p>

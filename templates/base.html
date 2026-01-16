@@ -9,8 +9,17 @@
 <body>
     <h1>VITTA – Sistema de Saúde</h1>
 
-    {% block content %}{% endblock %}
-
-    
+    {% block content %}
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li class="{{ message.tags }}">
+                    {{ message }}
+                </li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    {% endblock %}
+   
 </body>
 </html>

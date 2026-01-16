@@ -15,11 +15,20 @@
     {% for consulta in consultas %}
         <li>
             <strong>{{ consulta.hora }}</strong> —
-            {{ consulta.paciente.nome }} |
+            {{ consulta.paciente.nome }}
+            <br>
             {{ consulta.profissional }} |
             {{ consulta.get_status_display }}
             |
-            <a href="{% url 'prontuario_abrir' consulta.id %}">Prontuário</a>
+            {% if consulta.prontuario %}
+                <a href="{% url 'prontuario_abrir' consulta.id %}">
+                    Editar prontuário
+                </a>
+            {% else %}
+                <a href="{% url 'prontuario_abrir' consulta.id %}">
+                    Criar prontuário
+                </a>
+            {% endif %}
         </li>
     {% empty %}
         <li>Nenhuma consulta para esta data.</li>
