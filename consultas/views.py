@@ -5,8 +5,12 @@ from .forms import ConsultaForm
 from datetime import date
 
 def consulta_list(request):
-    consultas = Consulta.objects.select_related().order_by('data', 'hora')
-    return render(request, 'consultas/list.html', {'consultas': consultas})
+    consultas = Consulta.objects.all().order_by('-data', '-hora')
+    return render(
+        request,
+        'consultas/consulta_list.html',
+        {'consultas': consultas}
+    )
 
 
 def consulta_create(request):
@@ -19,7 +23,11 @@ def consulta_create(request):
     else:
         form = ConsultaForm()
 
-    return render(request, 'consultas/form.html', {'form': form})
+    return render(
+        request, 
+        'consultas/consulta_form.html', 
+        {'form': form}
+    )   
 
 
 def consulta_update(request, pk):
@@ -34,7 +42,11 @@ def consulta_update(request, pk):
     else:
         form = ConsultaForm(instance=consulta)
 
-    return render(request, 'consultas/form.html', {'form': form})
+    return render(
+        request, 
+        'consultas/consulta_form.html', 
+        {'form': form}
+    )
 
 
 def consulta_delete(request, pk):
@@ -49,10 +61,10 @@ def consulta_delete(request, pk):
         request, 
         'consultas/confirm_delete.html', 
         {'consulta': consulta}
-        )
+    )
 
 
-def agenda(request):
+def consulta_agenda(request):
     data_selecionada = request.GET.get('data')
     
     if data_selecionada:
@@ -66,7 +78,7 @@ def agenda(request):
         
     return render(
         request, 
-        'consultas/agenda.html', 
+        'consultas/consulta_agenda.html', 
         {    
             'consultas': consultas, 
             'data_selecionada': data_selecionada

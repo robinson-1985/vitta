@@ -15,13 +15,13 @@ def criar_prontuario(request, consulta_id):
         form = ProntuarioForm(request.POST, instance=prontuario)
         if form.is_valid():
             form.save()
-            return redirect('agenda')
+            return redirect('consulta_list')
     else:
         form = ProntuarioForm(instance=prontuario)
     
     return render(
         request, 
-        'prontuarios/form.html', 
+        'prontuarios/prontuario_form.html', 
         {
             'form': form, 
             'consulta': consulta,
