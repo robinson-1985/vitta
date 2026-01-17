@@ -5,7 +5,12 @@
 
 <form method="get">
     <label for="data">Selecione a data:</label>
-    <input type="date" id="data" name="data" value="{{ data_selecionada }}">
+    <input
+    type="date"
+    id="data"
+    name="data"
+    value="{{ data_selecionada|date:'Y-m-d' }}"
+>
     <button type="submit">Filtrar</button>
 </form>
 
@@ -14,12 +19,13 @@
 <ul>
     {% for consulta in consultas %}
         <li>
-            <strong>{{ consulta.hora }}</strong> —
+             <strong>{{ consulta.data|date:"d/m/Y" }}</strong> —
             {{ consulta.paciente.nome }}
             <br>
             {{ consulta.profissional }} |
-            {{ consulta.get_status_display }}
-            |
+            {{ consulta.get_status_display }} |
+            <small>{{ consulta.hora|time:"H:i" }}</small>
+
             {% if consulta.prontuario %}
                 <a href="{% url 'prontuario_abrir' consulta.id %}">
                     Editar prontuário
@@ -36,5 +42,4 @@
 </ul>
 
 <a href="{% url 'consulta_list' %}">Voltar</a>
-
 {% endblock  %}

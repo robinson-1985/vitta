@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Consulta
 from .forms import ConsultaForm
-from datetime import date
+from datetime import date, datetime
+from django.utils import timezone
 
 def consulta_list(request):
     consultas = Consulta.objects.all().order_by('-data', '-hora')
@@ -69,11 +70,11 @@ def consulta_agenda(request):
     
     if data_selecionada:
         consultas = Consulta.objects.filter(
-            data=data_selecionada
+            data__date=data_selecionada
         ).order_by('hora')
     else:
         consultas = Consulta.objects.filter(
-            data=date.today()
+            data__date=timezone.localdate()
         ).order_by('hora')
         
     return render(
