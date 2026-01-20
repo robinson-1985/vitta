@@ -368,3 +368,21 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# Django
+db.sqlite3
+__pycache__/
+*.pyc
+
+# Virtualenv
+venv/
+
+# Static files
+staticfiles/
+
+# Media
+media/
+
+# IDE
+.vscode/
+.idea/
