@@ -1,0 +1,5 @@
+venv/
+.venv/
+snap/
+.git/
+db.sqlite3
