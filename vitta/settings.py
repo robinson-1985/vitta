@@ -86,9 +86,6 @@ WSGI_APPLICATION = 'vitta.wsgi.application'
 
 DATABASE_URL = os.getenv("DATABASE_URL") or os.getenv("DATABASE_PUBLIC_URL")
 
-if not DATABASE_URL:
-    raise Exception("DATABASE_URL não está definida")
-
 DATABASES = {
     "default": dj_database_url.config(
         default=DATABASE_URL,
