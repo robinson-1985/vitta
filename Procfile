@@ -1,1 +1,2 @@
-web: python manage.py migrate && gunicorn vitta.wsgi --bind 0.0.0.0:$PORT
+web: python manage.py collectstatic --noinput && python manage.py migrate && gunicorn vitta.wsgi --bind 0.0.0.0:$PORT --log-level debug
+
