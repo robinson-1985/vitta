@@ -36,11 +36,16 @@ if not SECRET_KEY:
 
 # Hosts: coloque sua URL do Railway aqui (ou use env)
 DEFAULT_ALLOWED_HOSTS = "web-production-54570.up.railway.app"
-ALLOWED_HOSTS = [h.strip() for h in os.getenv("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS).split(",") if h.strip()]
+ALLOWED_HOSTS = [
+    "web-production-54570.up.railway.app",
+    "www.vitta.app",
+    "vitta.app",
+]
 
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.railway.app",
+     "https://vitta.app",
 ]
 
 # Recomendado quando está em produção atrás de proxy (Railway)
