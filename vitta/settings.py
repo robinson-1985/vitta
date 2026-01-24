@@ -35,8 +35,9 @@ if not SECRET_KEY:
     SECRET_KEY = "unsafe-development-key-change-me"
 
 # Hosts: coloque sua URL do Railway aqui (ou use env)
-DEFAULT_ALLOWED_HOSTS = ".railway.app"
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS).split(",")
+DEFAULT_ALLOWED_HOSTS = "web-production-54570.up.railway.app"
+ALLOWED_HOSTS = [h.strip() for h in os.getenv("ALLOWED_HOSTS", DEFAULT_ALLOWED_HOSTS).split(",") if h.strip()]
+
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.railway.app",
