@@ -28,11 +28,15 @@ IS_PRODUCTION = (not DEBUG) or (RAILWAY_ENV == "production")
 
 # --- SECURITY ---
 SECRET_KEY = os.getenv("SECRET_KEY")
-if IS_PRODUCTION and not SECRET_KEY:
-    raise RuntimeError("SECRET_KEY is not set in production")
+
+DEBUG = os.getenv("DEBUG", "False") == "True"
+
 if not SECRET_KEY:
-    # dev/local fallback (não use isso em produção)
-    SECRET_KEY = "unsafe-development-key-change-me"
+    if DEBUG:
+        SECRET_KEY = "unsafe-development-key-change-me"
+    else:
+        raise RuntimeError("SECRET_KEY is not set in production")
+
 
 # Hosts: coloque sua URL do Railway aqui (ou use env)
 DEFAULT_ALLOWED_HOSTS = "web-production-54570.up.railway.app"
