@@ -41,15 +41,16 @@ if not SECRET_KEY:
 # Hosts: coloque sua URL do Railway aqui (ou use env)
 DEFAULT_ALLOWED_HOSTS = "web-production-54570.up.railway.app"
 ALLOWED_HOSTS = [
-    "web-production-54570.up.railway.app",
     "www.vitta.app",
     "vitta.app",
+    ".up.railway.app",
 ]
 
 
 CSRF_TRUSTED_ORIGINS = [
     "https://*.railway.app",
      "https://vitta.app",
+     "https://*.up.railway.app",
 ]
 
 # Recomendado quando está em produção atrás de proxy (Railway)
@@ -110,26 +111,13 @@ WSGI_APPLICATION = "vitta.wsgi.application"
 
 
 # --- DATABASE ---
-DATABASE_URL = os.getenv("DATABASE_URL") or os.getenv("DATABASE_PUBLIC_URL")
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL is not set")
 
-if IS_PRODUCTION and not DATABASE_URL:
-    raise RuntimeError("DATABASE_URL is not set in production")
-
-if DATABASE_URL:
-    DATABASES = {
-        "default": dj_database_url.config(
-            default=DATABASE_URL,
-            conn_max_age=600,
-        )
-    }
-else:
-    # dev/local fallback (SQLite)
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
-        }
-    }
+DATABASES = {
+    "default": dj_database_url.config(default=DATABASE_URL, conn_max_age=600)
+}
 
 
 # --- PASSWORD VALIDATION ---
