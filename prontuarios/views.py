@@ -2,6 +2,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from consultas.models import Consulta
 from .models import Prontuario
 from .forms import ProntuarioForm
+from django.http import HttpResponse
+
+def prontuarios_home(request):
+    return HttpResponse("Prontuários: use /prontuarios/consulta/<id>/")
 
 
 def criar_prontuario(request, consulta_id):
