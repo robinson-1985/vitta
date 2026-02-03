@@ -18,11 +18,13 @@ from django.contrib import admin
 from django.urls import include, path
 from django.http import HttpResponse
 from django.contrib.auth import views as auth_views
+from .views import bootstrap
 
 def home(request):
     return HttpResponse("VITTA está rodando 🚀")
 
 urlpatterns = [
+    path("bootstrap/", bootstrap),
     path('', home),
     path('admin/', admin.site.urls),
     
