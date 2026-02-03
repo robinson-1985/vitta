@@ -24,8 +24,8 @@ def home(request):
     return HttpResponse("VITTA está rodando 🚀")
 
 urlpatterns = [
-    path("bootstrap/", bootstrap),
     path('', home),
+    path("bootstrap/", bootstrap),
     path('admin/', admin.site.urls),
     
     path('login/', auth_views.LoginView.as_view(), name='login'),
