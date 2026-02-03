@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from .models import Paciente
 from .forms import PacienteForm
+from django.contrib.auth.decorators import login_required
 
-
+@login_required
 def paciente_list(request):
     pacientes = Paciente.objects.all().order_by('nome')
     return render(request, 'pacientes/index.html', {'pacientes': pacientes})

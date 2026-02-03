@@ -4,7 +4,10 @@ from .models import Consulta
 from .forms import ConsultaForm
 from datetime import date, datetime
 from django.utils import timezone
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def consulta_list(request):
     consultas = Consulta.objects.all().order_by('-data', '-hora')
     return render(

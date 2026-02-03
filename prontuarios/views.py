@@ -3,7 +3,10 @@ from consultas.models import Consulta
 from .models import Prontuario
 from .forms import ProntuarioForm
 from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
+
+@login_required
 def prontuarios_home(request):
     return HttpResponse("Prontuários: use /prontuarios/consulta/<id>/")
 

@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from django.http import HttpResponse
-
+from django.contrib.auth import views as auth_views
 
 def home(request):
     return HttpResponse("VITTA está rodando 🚀")
@@ -25,6 +25,10 @@ def home(request):
 urlpatterns = [
     path('', home),
     path('admin/', admin.site.urls),
+    
+    path('login/', auth_views.LoginView.as_view(), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    
     path('consultas/', include('consultas.urls')),
     path('pacientes/', include('pacientes.urls')),
     path('prontuarios/', include('prontuarios.urls')),

@@ -38,7 +38,7 @@ if not SECRET_KEY:
         raise RuntimeError("SECRET_KEY is not set in production")
 
 
-# Hosts: coloque sua URL do Railway aqui (ou use env)
+# --- HOSTS / SSL ---
 DEFAULT_ALLOWED_HOSTS = "web-production-54570.up.railway.app"
 ALLOWED_HOSTS = [
     "www.vitta.app",
@@ -53,7 +53,7 @@ CSRF_TRUSTED_ORIGINS = [
      "https://*.up.railway.app",
 ]
 
-# Recomendado quando está em produção atrás de proxy (Railway)
+
 SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
 
 if IS_PRODUCTION:
@@ -147,3 +147,7 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOGIN_URL = "/login/"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/login/"
