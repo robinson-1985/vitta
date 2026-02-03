@@ -5,14 +5,6 @@ from .forms import PacienteForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 
-def bootstrap_admin():
-    User = get_user_model()
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser(
-            "admin",
-            "admin@vitta.com",
-            "SenhaForte123"
-        )
 
 @login_required
 def paciente_list(request):
